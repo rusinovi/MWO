@@ -1,0 +1,9 @@
+sequenceDiagram
+    actor Użytkownik
+    participant Biletomat
+    participant SystemTransakcyjny
+
+    Użytkownik->>Biletomat: Wybór metody płatności
+    Biletomat->>SystemTransakcyjny: Przesłanie żądania autoryzacji
+    SystemTransakcyjny->>Biletomat: Potwierdzenie płatności
+    Biletomat->>Użytkownik: Wydanie potwierdzenia zakupu

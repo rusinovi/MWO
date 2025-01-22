@@ -1,0 +1,7 @@
+sequenceDiagram
+    actor Administrator
+    participant Biletomat
+
+    Administrator->>Biletomat: Zdalne polecenie aktualizacji
+    Biletomat->>Biletomat: Aktualizacja oprogramowania
+    Biletomat->>Administrator: Potwierdzenie zakończenia aktualizacji
