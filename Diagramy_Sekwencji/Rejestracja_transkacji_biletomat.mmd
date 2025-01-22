@@ -1,0 +1,8 @@
+sequenceDiagram
+    actor Użytkownik
+    participant Biletomat
+    participant SystemBiletowy
+
+    Użytkownik->>Biletomat: Dokonanie płatności
+    Biletomat->>SystemBiletowy: Rejestracja transakcji
+    SystemBiletowy->>Biletomat: Potwierdzenie rejestracji
