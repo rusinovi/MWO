@@ -1,0 +1,25 @@
+@startuml
+
+actor Użytkownik
+actor Administrator
+actor "System Transakcyjny" as SystemTransakcyjny
+actor "System Biletowy" as SystemBiletowy
+actor Biletomat
+
+'Użytkownik i biletomat
+Użytkownik --> (Płatność kartą, gotówką lub telefonem)
+
+'Biletomat
+Biletomat --> (Obsługa różnych metod płatności)
+Biletomat --> (Rejestrowanie transakcji)
+
+'System transakcyjny
+SystemTransakcyjny --> (Autoryzacja płatności w czasie rzeczywistym)
+
+'System biletowy
+SystemBiletowy --> (Rejestrowanie sprzedanych biletów)
+
+'Administrator
+Administrator --> (Zdalna aktualizacja biletomatów)
+
+@enduml
