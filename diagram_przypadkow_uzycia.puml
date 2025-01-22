@@ -8,6 +8,9 @@ actor Biletomat
 
 'Użytkownik i biletomat
 Użytkownik --> (Płatność kartą, gotówką lub telefonem)
+Użytkownik --> (Wybór rodzaju biletu)
+(Wybór rodzaju biletu) --> (Wybór języka)
+(Wybór języka) --> (Otrzymanie potwierdzenia zakupu)
 
 'Biletomat
 Biletomat --> (Obsługa różnych metod płatności)
@@ -21,5 +24,6 @@ SystemBiletowy --> (Rejestrowanie sprzedanych biletów)
 
 'Administrator
 Administrator --> (Zdalna aktualizacja biletomatów)
+(Zdalna aktualizacja biletomatów) --> (Konfiguracja oferty)
 
 @enduml
