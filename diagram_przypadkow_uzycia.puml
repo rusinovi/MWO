@@ -1,29 +1,59 @@
-@startuml
+@startuml System Biletowy - Diagram Przypadków Użycia
 
-actor Użytkownik
-actor Administrator
-actor "System Transakcyjny" as SystemTransakcyjny
-actor "System Biletowy" as SystemBiletowy
-actor Biletomat
+left to right direction
+skinparam packageStyle rectangle
 
-'Użytkownik i biletomat
-Użytkownik --> (Płatność kartą, gotówką lub telefonem)
-Użytkownik --> (Wybór rodzaju biletu)
-(Wybór rodzaju biletu) --> (Wybór języka)
-(Wybór języka) --> (Otrzymanie potwierdzenia zakupu)
+' Aktorzy zidentyfikowani w diagramach sekwencji
+actor "Użytkownik" as user
+actor "Administrator" as admin
+actor "System Wsparcia\nTechnicznego" as swt
+actor "Serwisant" as serwis
+actor "System\nBiletowy" as sb
+actor "System\nTransakcyjny" as st
 
-'Biletomat
-Biletomat --> (Obsługa różnych metod płatności)
-Biletomat --> (Rejestrowanie transakcji)
+rectangle "System Biletomatów" {
+    ' Przypadki użycia z diagramu uzytkownik_1.mmd
+    usecase "Rozpoczęcie zakupu" as UC1
+    usecase "Wybór biletu" as UC2
+    usecase "Wybór metody\npłatności" as UC3
+    usecase "Otrzymanie\npotwierdzenia/biletu" as UC4
 
-'System transakcyjny
-SystemTransakcyjny --> (Autoryzacja płatności w czasie rzeczywistym)
+    ' Przypadki użycia z uzytkownik_2.mmd
+    usecase "Wybór języka" as UC5
+    usecase "Akceptacja\ntransakcji" as UC6
 
-'System biletowy
-SystemBiletowy --> (Rejestrowanie sprzedanych biletów)
+    ' Przypadki użycia z administrator.mmd
+    usecase "Aktualizacja\nkonfiguracji" as UC7
+    usecase "Pobieranie raportów\nfinansowych" as UC8
 
-'Administrator
-Administrator --> (Zdalna aktualizacja biletomatów)
-(Zdalna aktualizacja biletomatów) --> (Konfiguracja oferty)
+    ' Przypadki użycia z wsparcie_techniczne.mmd
+    usecase "Zgłoszenie błędu" as UC9
+    usecase "Wykonanie naprawy" as UC10
+}
+
+' Relacje z diagramu uzytkownik_1.mmd
+user --> UC1
+user --> UC2
+user --> UC3
+user --> UC4
+
+' Relacje z diagramu uzytkownik_2.mmd
+user --> UC5
+user --> UC6
+
+' Relacje z diagramu administrator.mmd
+admin --> UC7
+admin --> UC8
+sb --> UC8
+
+' Relacje z diagramu wsparcie_techniczne.mmd
+swt --> UC9
+serwis --> UC10
+
+' Zależności między przypadkami użycia
+UC1 ..> UC2 : <<include>>
+UC2 ..> UC3 : <<include>>
+UC3 ..> UC4 : <<include>>
+UC9 ..> UC10 : <<include>>
 
 @enduml
