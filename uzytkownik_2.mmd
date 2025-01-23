@@ -1,0 +1,10 @@
+sequenceDiagram
+    actor Użytkownik as Użytkownik
+    participant Biletomat as Biletomat
+
+    Użytkownik->>Biletomat: Wybór języka
+    Biletomat-->>Użytkownik: Wyświetl interfejs w wybranym języku
+    Użytkownik->>Biletomat: Wybór biletu
+    Biletomat-->>Użytkownik: Wyświetlenie szczegółów biletu
+    Użytkownik->>Biletomat: Akceptacja transakcji
+    Biletomat->>Użytkownik: Finalizacja zakupu
