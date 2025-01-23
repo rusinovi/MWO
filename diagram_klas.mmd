@@ -1,0 +1,94 @@
+classDiagram
+
+%% Model Package
+namespace Model {
+    class Bilet {
+        -id: String
+        -typ: String
+        -cena: Decimal
+        -dataWaznosci: DateTime
+        +getBiletDetails() BiletInfo
+        +validateBilet() boolean
+    }
+
+    class Transakcja {
+        -id: String
+        -kwota: Decimal
+        -metodaPlatnosci: String
+        -status: StatusTransakcji
+        -czasTransakcji: DateTime
+        +przetworzPlatnosc() boolean
+        +zapiszTransakcje() void
+        +getStatus() StatusTransakcji
+    }
+
+    class StatusTransakcji {
+        <<enumeration>>
+        OCZEKUJACA
+        ZATWIERDZONA
+        ODRZUCONA
+    }
+
+    class MetodaPlatnosci {
+        -typ: String
+        -dostawca: String
+        +autoryzujPlatnosc() boolean
+        +przetworzPlatnosc() StatusTransakcji
+    }
+}
+
+%% View Package
+namespace View {
+    class BiletomatUI {
+        +wyswietlListeBiletow(List~BiletInfo~)
+        +wyswietlMetodyPlatnosci()
+        +wyswietlStatusTransakcji(StatusTransakcji)
+        +wydrukujBilet(BiletInfo)
+        +pokazKomunikat(String)
+    }
+
+    class BiletInfo {
+        -typ: String
+        -cena: Decimal
+        -opis: String
+        +getDisplayInfo() String
+    }
+}
+
+%% Controller Package
+namespace Controller {
+    class BiletomatController {
+        -biletomatUI: BiletomatUI
+        -systemBiletowyService: SystemBiletowyService
+        -systemTransakcyjnyService: SystemTransakcyjnyService
+        +rozpocznijZakup()
+        +pobierzListeBiletow() List~BiletInfo~
+        +wybierzBilet(String biletId)
+        +wybierzMetodePlatnosci(String metoda)
+        +przetworzTransakcje() boolean
+        +finalizujZakup()
+    }
+
+    class SystemBiletowyService {
+        +pobierzDostepneBilety() List~Bilet~
+        +zarejestrujZakup(Bilet, Transakcja)
+        +wygenerujBilet(BiletInfo) Bilet
+    }
+
+    class SystemTransakcyjnyService {
+        +autoryzujPlatnosc(Transakcja) boolean
+        +zapiszTransakcje(Transakcja)
+        +sprawdzStatusTransakcji(String transakcjaId)
+    }
+}
+
+%% Relationships
+BiletomatController --> BiletomatUI
+BiletomatController --> SystemBiletowyService
+BiletomatController --> SystemTransakcyjnyService
+SystemBiletowyService --> Bilet
+SystemTransakcyjnyService --> Transakcja
+Transakcja --> StatusTransakcji
+Transakcja --> MetodaPlatnosci
+BiletomatUI --> BiletInfo
+Bilet --> BiletInfo
