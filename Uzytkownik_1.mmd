@@ -1,0 +1,20 @@
+sequenceDiagram
+    actor Użytkownik as Użytkownik
+    participant Biletomat as Biletomat
+    participant SystemBiletowy as System Biletowy
+    participant SystemTransakcyjny as System Transakcyjny
+
+    Użytkownik->>Biletomat: Rozpoczęcie zakupu
+    Biletomat->>SystemBiletowy: Pobierz listę dostępnych biletów
+    SystemBiletowy-->>Biletomat: Lista biletów
+    Biletomat-->>Użytkownik: Wyświetl listę biletów
+    Użytkownik->>Biletomat: Wybierz bilet
+    Biletomat-->>Użytkownik: Wyświetl szczegóły transakcji
+    Użytkownik->>Biletomat: Potwierdzenie transakcji
+    Biletomat-->>Użytkownik: Wybierz metodę płatności (karta/gotówka/telefon)
+    Użytkownik->>Biletomat: Wybór metody płatności
+    Biletomat->>SystemTransakcyjny: Przekazanie danych płatności (zależnie od metody)
+    SystemTransakcyjny-->>Biletomat: Status transakcji (sukces/odrzucenie)
+    Biletomat->>SystemBiletowy: Zarejestruj zakup
+    SystemBiletowy-->>Biletomat: Potwierdzenie zakupu
+    Biletomat-->>Użytkownik: Wydruk biletu / Wyświetlenie biletu elektronicznego i wydanie reszty
