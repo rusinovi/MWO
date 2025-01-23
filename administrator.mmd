@@ -1,0 +1,14 @@
+sequenceDiagram
+    actor Administrator as Administrator
+    participant SystemCentralny as System centralny
+    participant Biletomat as Biletomat
+    participant SystemBiletowy as System Biletowy
+
+    Administrator->>SystemCentralny: Przekazanie nowej konfiguracji
+    SystemCentralny-->>Administrator: Potwierdzenie wdrożenia
+    SystemCentralny->>Biletomat: Aktualizacja konfiguracji biletomatu
+    Biletomat-->>SystemCentralny: Potwierdzenie zakończenia aktualizacji
+
+    Administrator->>SystemBiletowy: Polecenie pobrania raportów finansowych
+    SystemBiletowy->>SystemCentralny: Przekazanie raportów
+    SystemCentralny-->>Administrator: Raporty finansowe
