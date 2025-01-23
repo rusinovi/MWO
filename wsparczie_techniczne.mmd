@@ -1,0 +1,11 @@
+sequenceDiagram
+    actor SWT as System wsparcia technicznego
+    participant B as Biletomat
+    participant Serwisant as Serwis
+
+    B->>SWT: Zgłoszenie błędu (np. brak papieru)
+    SWT-->>B: Potwierdzenie odbioru zgłoszenia
+    SWT->>Serwisant: Przesłanie alertu o błędzie
+    Serwisant-->>SWT: Potwierdzenie przyjęcia zgłoszenia
+    Serwisant->>B: Wykonanie naprawy
+    B-->>SWT: Status po naprawie
